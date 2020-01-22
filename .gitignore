@@ -1,0 +1,17 @@
+# Makefile dependencies
+.deps/
+
+# TeX intermediaries
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.synctex
+*.synctex.gz
+*.toc
+
+# not tracking binaries...
+sample.pdf
