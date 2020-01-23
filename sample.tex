@@ -18,7 +18,9 @@
 \usepackage{csquotes}
 \usepackage{hyperref}
 
-%\japterm{kanji}{漢字}{chin. Schriftzeichen}
+\addbibresource{sample.bib}
+
+\japterm{kanji}{漢字}
 
 \begin{document}
 
@@ -28,7 +30,7 @@
 Diese Musterdatei soll Ihnen die formale Ausgestaltung des Hauptteils einer Hausarbeit anhand von Beispielen vor Augen führen. Die vollständigen Vorgaben finden Sie im Überblick auf der \href{\japfacultyhomepage}{Homepage der Japanologie}.
 
 \section{Formales}
-Der linke Seitenrand ist 2 cm breit, der rechte 3 cm. Oben beträgt der Abstand 2,5 cm und unten 2 cm. Die verwendete Schriftart heißt \enquote{Times New Roman}, es handelt sich dabei um eine Serifenschrift. Die Schriftgröße beträgt 12 pt, der Zeilenabstand ist auf 16 pt festgesetzt.%TODO footnote 1 In Fußnoten wird die gleiche Schriftart wie im Haupttext verwendet, allerdings in der Schriftgröße 10 pt. Der Zeilenabstand beträgt hier genau 13 pt. Fußnoten enthalten z.B. Quellen, Verweise, Zusatzinformationen etc. Sie beginnen immer mit einem Großbuchstaben und enden mit einem Punkt.
+Der linke Seitenrand ist 2 cm breit, der rechte 3 cm. Oben beträgt der Abstand 2,5 cm und unten 2 cm. Die verwendete Schriftart heißt \enquote{Times New Roman}, es handelt sich dabei um eine Serifenschrift. Die Schriftgröße beträgt 12 pt, der Zeilenabstand ist auf 16 pt festgesetzt.\footnote{FooBar}%TODO footnote 1 In Fußnoten wird die gleiche Schriftart wie im Haupttext verwendet, allerdings in der Schriftgröße 10 pt. Der Zeilenabstand beträgt hier genau 13 pt. Fußnoten enthalten z.B. Quellen, Verweise, Zusatzinformationen etc. Sie beginnen immer mit einem Großbuchstaben und enden mit einem Punkt.
 
 Die wissenschaftliche Hausarbeit ist in \textbf{einfacher Ausfertigung} ausgedruckt und geheftet im Sekretariat einzureichen. Zusätzlich dazu muss der verantwortlichen Lehrperson ein Exemplar im \textbf{Word- oder OpenOffice-Format} per E-Mail zugehen. Die Abgabetermine werden rechtzeitig bekanntgeben und/oder durch Aushänge mitgeteilt.
 
@@ -45,12 +47,12 @@ Wesentliches Beurteilungskriterium für wissenschaftliches Arbeiten ist das Offe
 \subsubsection{Direktes Zitat}
 Direkte oder wörtliche Zitate werden im Text durch Anführungszeichen gekennzeichnet und müssen durch eine eindeutige Quellenangabe mit Seitenzahl in der Fußnote ausgewiesen werden.
 
-\textbf{Beispiel}: Mustermann sagt hierzu: \enquote{Direkte Zitate ohne Fußnote und Quellenangabe sind wertlos.}%TODO quote footnote
+\textbf{Beispiel}: Mustermann sagt hierzu: \enquote{Direkte Zitate ohne Fußnote und Quellenangabe sind wertlos.}\footcite[12]{muster:quellen}
 
 \subsubsection{Indirektes Zitat}
 Indirekte Zitate sind Wiedergaben einer Aussage Dritter (z.B. Der Autor meint, dass ... sei; oder bestimmte Verben wie \enquote{gelten}, \enquote{sollen}, \enquote{scheinen}), die als solches ebenfalls durch eine Quellenangabe mit Seitenzahl in der Fußnote ausgewiesen werden müssen.
 
-\textbf{Beispiel}: Eine hiervon abweichende Praxis sieht Doe als Missachtung wissenschaftlicher Prinzipien an.%TODO quote footnote
+\textbf{Beispiel}: Eine hiervon abweichende Praxis sieht Doe als Missachtung wissenschaftlicher Prinzipien an.\footcite[13\psq]{doe:references}
 
 \subsubsection{Drittzitat}
 Sogenannte Drittzitate, auch als Zweitzitate, Sekundärzitate oder Zitate aus zweiter Hand bezeichnet, sind Inhalte oder wörtliche Zitate aus Publikationen, die ungeprüft, ohne den zugrundeliegenden Text gelesen zu haben, in die eigene Arbeit übernommen werden. \underline{Dieses Vorgehen ist wissenschaftlich nicht zulässig!}
@@ -58,14 +60,11 @@ Sogenannte Drittzitate, auch als Zweitzitate, Sekundärzitate oder Zitate aus zw
 Wenn beispielsweise in einem Text, der Ihnen vorliegt, ein direktes Zitat von NATSUME Sôseki angeführt wird, dürfen Sie dieses Sôseki-Zitat nicht übernehmen, sondern Sie müssen im Originaltext von Sôseki nachschauen und direkt daraus zitieren.
 
 \subsection{Form der Quellenangaben}
-Beim erstmaligen Verweis auf eine Quelle in der Fußnote sind die \textbf{vollständigen Literaturangaben} aufzuführen. Beachten Sie hierfür unsere Vorgaben für die Notation! Bei allen weiteren Nennungen wird ein Kurzbeleg (Autor, (Kurz-)Titel und Seitenzahl) verwendet.%TODO footnote 4
+Beim erstmaligen Verweis auf eine Quelle in der Fußnote sind die \textbf{vollständigen Literaturangaben} aufzuführen. Beachten Sie hierfür unsere Vorgaben für die Notation! Bei allen weiteren Nennungen wird ein Kurzbeleg (Autor, (Kurz-)Titel und Seitenzahl) verwendet.\footcite[10]{muster:quellen}
 
 \subsubsection{Japanische Quellen}
-Bei Zitaten aus dem Japanischen muss der Originaltext nicht noch einmal wiedergegeben werden, die genaue Quellenangabe reicht hier aus. Bei japanischen Titeln werden Autor, Titel, Reihe und Zeitschriftentitel transliteriert und mit den entsprechenden \textit{kanji} versehen. Die \textit{kanji} der Buchtitel werden \textbf{nicht} kursiv gesetzt! Eine Übersetzung des Titels ist in der Regel nicht nötig, es sei denn, im Fließtext wird explizit darauf Bezug genommen. Verlagsort und Verlag können ohne Angabe der \textit{kanji} lediglich transliteriert werden.%TODO footnote 5
+Bei Zitaten aus dem Japanischen muss der Originaltext nicht noch einmal wiedergegeben werden, die genaue Quellenangabe reicht hier aus. Bei japanischen Titeln werden Autor, Titel, Reihe und Zeitschriftentitel transliteriert und mit den entsprechenden \japref{kanji} versehen. Die \japref{kanji} der Buchtitel werden \textbf{nicht} kursiv gesetzt! Eine Übersetzung des Titels ist in der Regel nicht nötig, es sei denn, im Fließtext wird explizit darauf Bezug genommen. Verlagsort und Verlag können ohne Angabe der \japref{kanji} lediglich transliteriert werden.\footcite[112]{suzuki:ronbun}
 
-%Testverlag 2014, S. 12.
-%3 Vgl. DOE, Jane: Get Your References Straight! Why Footnotes Matter. Springfield: Corny Publishing 2013, S.
-%13f. 4 Vgl. MUSTERMANN: Der Sinn von Quellenangaben, S. 10. 5 Vgl. SUZUKI, Kazuko 鈴木和子: Ronbun wo kakimashô! 論文を書きましょう！ Kyôto: Muromachi shoten
-%2011, S. 112.
+\printbibliography
 
 \end{document}

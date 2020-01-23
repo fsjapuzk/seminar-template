@@ -68,7 +68,15 @@
 \RequirePackage{boxedminipage}
 \RequirePackage[a4paper, left=2cm, right=3cm, top=2.5cm, bottom=2cm, includefoot]{geometry}
 \RequirePackage[parfill]{parskip}
-%\RequirePackage[nolist]{acronym}
+\RequirePackage[acronyms,xindy]{glossaries}
+\RequirePackage[
+	backend=biber,
+	style=iso-authoryear,
+	citestyle=verbose-ibid,
+	block=space,
+	sortlocale=de_DE,
+	autolang=other
+]{biblatex}
 
 \leading{\@japfacultyleading}
 
@@ -82,8 +90,21 @@
 \renewcommand{\headrulewidth}{0pt}
 \fancyfoot[R]{\thepage}
 
-%\newcommand{\japterm}[3]{\acrodef{#1}[#1]{\textit{#1} #2 (#3)}}
-%\newcommand{\japref}[1]{\ac{#1}}
+% japterm(romaji, kokuji)
+\newcommand{\japterm}[2]{
+	\newacronym{#1}{\textit{#1}}{\textit{#1}\space#2}
+}
 
-%TODO quot
-%TODO acronyms japanese
+\newcommand{\japtermtranslate}[3]{\japterm{#1}{#2\space(#3)}}
+% japtermname(name, kanji, from, to)
+\newcommand{\japtermname}[4]{\japterm{#1}{#2\space(#3-#4)}}
+% japtermmedium(name, kanji, release, meaning)
+\newcommand{\japtermmedium}[4]{\japterm{#1}{#2\space(#3, dt. #4)}}
+% japtermera(name, from, to)
+\newcommand{\japtermera}[3]{\japterm{#1}{{#1}-Zeit\space(#2-#3)}}
+
+% TODO nice acronyms style
+% FIXME japref with names that contain non-ascii
+\newcommand{\japref}[1]{\gls{#1}}
+
+%TODO footnote-ISO
