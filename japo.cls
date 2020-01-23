@@ -72,7 +72,8 @@
 \RequirePackage[
 	backend=biber,
 	style=iso-authoryear,
-	citestyle=verbose-ibid,
+	citestyle=iso-authoryear,
+	abbreviate=false,
 	block=space,
 	sortlocale=de_DE,
 	autolang=other
