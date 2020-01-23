@@ -12,6 +12,12 @@
 *.synctex
 *.synctex.gz
 *.toc
+*.run.xml
+
+# BibTeX intermediaries
+*.bbl
+*.bcf
+*.blg
 
 # not tracking binaries...
 sample.pdf
