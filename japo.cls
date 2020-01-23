@@ -68,7 +68,7 @@
 \RequirePackage{boxedminipage}
 \RequirePackage[a4paper, left=2cm, right=3cm, top=2.5cm, bottom=2cm, includefoot]{geometry}
 \RequirePackage[parfill]{parskip}
-\RequirePackage[acronyms,xindy]{glossaries}
+\RequirePackage[acronyms,xindy]{glossaries-extra}
 \RequirePackage[
 	backend=biber,
 	style=iso-authoryear,
@@ -90,14 +90,21 @@
 \renewcommand{\headrulewidth}{0pt}
 \fancyfoot[R]{\thepage}
 
+% glossaries parenthesis behavior
+\setabbreviationstyle[acronym]{long-only-short-only}
+
 % japterm(romaji, kokuji)
+\newcommand{\@japtermraw}[2]{
+	\newacronym{#1}{\textit{#1}}{#1\space#2}
+}
 \newcommand{\japterm}[2]{
 	\newacronym{#1}{\textit{#1}}{\textit{#1}\space#2}
 }
 
 \newcommand{\japtermtranslate}[3]{\japterm{#1}{#2\space(#3)}}
-% japtermname(name, kanji, from, to)
-\newcommand{\japtermname}[4]{\japterm{#1}{#2\space(#3-#4)}}
+% japtermname(family, name, kanji, from, to)
+\newcommand{\japtermname}[5]{\@japtermraw{\MakeUppercase{#1}}{\space#2\space#3\space(#4-#5)}}
+\newcommand{\japtermwesternname}[4]{\japterm{#1}{#2\space(#3-#4)}}
 % japtermmedium(name, kanji, release, meaning)
 \newcommand{\japtermmedium}[4]{\japterm{#1}{#2\space(#3, dt. #4)}}
 % japtermera(name, from, to)
