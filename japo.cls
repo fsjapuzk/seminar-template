@@ -72,7 +72,7 @@
 \RequirePackage[
 	backend=biber,
 	style=iso-authoryear,
-	citestyle=iso-authoryear,
+	citestyle=verbose-ibid,
 	abbreviate=false,
 	block=space,
 	sortlocale=de_DE,
@@ -90,6 +90,10 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
 \fancyfoot[R]{\thepage}
+
+% ISO-690 compliant LASTNAME, firstname citations
+% cf. https://tex.stackexchange.com/a/525382/205402
+\renewcommand\mkbibnamefamily{\lastnameformat}
 
 % glossaries parenthesis behavior
 \setabbreviationstyle[acronym]{long-only-short-only}
