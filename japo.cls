@@ -33,10 +33,10 @@
 	%\begin{minipage}{0.45\textwidth}
 	%	\flushright
 	%\end{minipage}
-	\vspace{6.5cm}
+	\vspace{6.0cm}
 	\begin{center}
 		\huge \@title\\
-		[0.2cm]
+		[0.7cm]
 		\normalsize \@japdocmoduletitle\\
 		\@japdoctype~in der Veranstaltung\\	
 		\enquote{\@japdoclvtitle}\\
@@ -52,10 +52,11 @@
 		{\@japdocstudysemester}. Fachsemester\\
 		\@japdocfieldofstudy\\
 		\@japdocemail\\
-		[0.75cm]
-		\@japdocaddress\\
+		%[0.75cm]
+		%\@japdocaddress\\
 	\end{center}
 	\end{titlepage}
+	\setcounter{page}{1}
 }
 
 \RequirePackage[ngerman]{babel} % spell checker
@@ -71,8 +72,7 @@
 \RequirePackage[acronyms,xindy]{glossaries-extra}
 \RequirePackage[
 	backend=biber,
-	style=iso-authoryear,
-	citestyle=verbose-ibid,
+	style=geschichtsfrkl,
 	abbreviate=false,
 	block=space,
 	sortlocale=de_DE,
@@ -93,7 +93,7 @@
 
 % ISO-690 compliant LASTNAME, firstname citations
 % cf. https://tex.stackexchange.com/a/525382/205402
-\renewcommand\mkbibnamefamily{\lastnameformat}
+%\renewcommand\mkbibnamefamily{\lastnameformat}
 
 % glossaries parenthesis behavior
 \setabbreviationstyle[acronym]{long-only-short-only}
@@ -118,5 +118,3 @@
 % TODO nice acronyms style
 % FIXME japref with names that contain non-ascii
 \newcommand{\japref}[1]{\gls{#1}}
-
-%TODO footnote-ISO
