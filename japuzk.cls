@@ -19,8 +19,6 @@
 
 \newcommand{\japfacultyhomepage}{https://japanologie.phil-fak.uni-koeln.de/}
 
-\newcommand{\@japfacultyleading}{16pt}
-
 \renewcommand{\maketitle}{
 	\begin{titlepage}
 	\begin{minipage}{\textwidth}
@@ -59,6 +57,14 @@
 	\setcounter{page}{1}
 }
 
+\let\OldTableofcontents\tableofcontents
+\renewcommand{\tableofcontents}{
+	\thispagestyle{empty}
+	\OldTableofcontents
+	\pagebreak
+	\setcounter{page}{1}
+}
+
 \RequirePackage[ngerman]{babel} % spell checker
 \RequirePackage{leading} % Zeilenabstand in pt.
 %\RequirePackage{mathptmx} % Times New Roman
@@ -79,6 +85,7 @@
 	autolang=other
 ]{biblatex}
 
+\newcommand{\@japfacultyleading}{16pt}
 \leading{\@japfacultyleading}
 
 \setlength\parindent{0pt}
