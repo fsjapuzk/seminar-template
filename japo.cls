@@ -61,7 +61,7 @@
 
 \RequirePackage[ngerman]{babel} % spell checker
 \RequirePackage{leading} % Zeilenabstand in pt.
-\RequirePackage{mathptmx} % Times New Roman
+%\RequirePackage{mathptmx} % Times New Roman
 \RequirePackage{luatexja-fontspec} % Kanji
 \RequirePackage{fancyhdr} % page number positioning
 \RequirePackage{csquotes}
