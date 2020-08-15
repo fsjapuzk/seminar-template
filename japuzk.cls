@@ -78,11 +78,15 @@
 \RequirePackage[acronyms,xindy]{glossaries-extra}
 \RequirePackage[
 	backend=biber,
-	style=geschichtsfrkl,
+	style=japuzkbib,
 	abbreviate=false,
 	block=space,
 	sortlocale=de_DE,
-	autolang=other
+	autolang=other,
+	maxnames=3,
+	mits=true,
+	mitjahr=false,
+	citeinit=false
 ]{biblatex}
 
 \newcommand{\@japfacultyleading}{16pt}

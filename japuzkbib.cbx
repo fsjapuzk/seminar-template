@@ -1,0 +1,168 @@
+\ProvidesFile{japuzkbib.cbx}%
+           [2020/08/15 v0.1 japuzkbib -- %
+            biblatex für Japanologen, cbx-Datei]%
+\ExecuteBibliographyOptions{%
+  citetracker=true,%
+  idemtracker=true,%
+  ibidtracker=true,%
+  opcittracker=false,%
+  loccittracker=false,%
+  sortcites=false%
+}%
+\newbool{cbx:seen}%
+\newbool{cbx:mitjahr}%
+\newbool{cbx:mitvn}%
+\newbool{cbx:mits}%
+\newbool{cbx:fnverweise}%
+\newbool{cbx:jahrkeineklammern}%
+\newbool{cbx:neueseitevollzitat}%
+\DeclareBibliographyOption{mitjahr}[true]{\csuse{bool#1}%
+             {cbx:mitjahr}}%
+\DeclareBibliographyOption{mitvn}[true]{\csuse{bool#1}%
+             {cbx:mitvn}}%
+\DeclareBibliographyOption{mits}[true]{\csuse{bool#1}{cbx:mits}}%
+\DeclareBibliographyOption{fnverweise}[true]{\csuse{bool#1}%
+             {cbx:fnverweise}}%
+\newbool{cbx:ibidpages}%
+\DeclareBibliographyOption{ibidpages}[true]{\csuse{bool#1}%
+             {cbx:ibidpages}}%
+\DeclareBibliographyOption{jahrkeineklammern}[true]{\csuse{bool#1}%
+             {cbx:jahrkeineklammern}}%
+\DeclareBibliographyOption{neueseitevollzitat}[true]{\csuse{bool#1}%
+             {cbx:neueseitevollzitat}}%
+\newbool{cbx:nurinit}%
+\DeclareBibliographyOption{citeinit}[true]{\csuse{bool#1}%
+             {cbx:nurinit}}%
+\AtBeginDocument{\ifbool{bbx:nurinit}%
+             {\global\booltrue{cbx:nurinit}}{}}%
+\newbool{cbx:ebd}
+\global\booltrue{cbx:ebd}
+\newbool{cbx:endpunkt}
+\global\booltrue{cbx:endpunkt}
+\ExecuteBibliographyOptions{citeinit,mitjahr,neueseitevollzitat}%
+\DeclareFieldFormat{prenote}{#1\isdot}%
+\DeclareFieldFormat{postnote}{#1}%
+\DeclareFieldFormat{shorttitle}{#1}%
+\renewcommand*{\multicitedelim}{\setunit{\addsemicolon\addspace}}%
+\newcommand*{\citeautorenschriftart}{\scshape}%
+\newcommand*{\citeautorentrennzeichen}%
+                         {\addcomma\addspace}%
+\DeclareNameFormat{cite:author}{%
+  \nameparts{#1}%
+  {\citeautorenschriftart%
+   \ifdefvoid{\namepartprefix}{}{\namepartprefix\addspace}%
+   \namepartfamily}%
+  \ifbool{cbx:mitvn}{%
+      \ifdefvoid{\namepartgiven}{}{\addcomma\space%
+            \ifbool{cbx:nurinit}{\namepartgiveni}{\namepartgiven}}}{%
+      \ifbool{cbx:nurinit}{\addcomma\addspace\namepartgiveni}{}%
+    }%
+  \ifthenelse{\value{listcount}<\value{liststop}}%
+    {\citeautorentrennzeichen}{}%
+  \isdot%
+}%
+\renewbibmacro*{prenote}{%
+  \iffieldundef{prenote}{}%
+    {\printfield{prenote}%
+     \setunit{\addspace}}}%
+\renewbibmacro*{postnote}{%
+  \setunit{\printdelim{postnotedelim}}%
+  \iffieldundef{postnote}{}%
+    {\ifboolexpr{not bool{cbx:seen}%
+             and not test {\iffieldundef{pages}}}%
+              {\printtext{hier}\addspace}{}%
+     \ifboolexpr{test {\iffieldequals{postnote}{\cbx@lastpagenumber}}%
+           and test {\iffieldequals{entrykey}{\cbx@lastentrykey}}%
+           and not (bool{cbx:neueseitevollzitat} and test {\iffirstonpage})%
+           and not bool{cbx:ibidpages}}{}{%
+         \ifbool{cbx:mits}{\printtext{S\adddot\addspace}}{}%
+         \printfield{postnote}%
+       }%
+   }%
+   \ifbool{cbx:endpunkt}{\setunit{\addperiod}}{}%
+   \savefield{postnote}{\cbx@lastpagenumber}%
+   \savefield{entrykey}{\cbx@lastentrykey}%
+}%
+\newbibmacro*{cite:name}{%
+  \ifnameundef{author}{%
+    \ifnameundef{editor}{}{%
+      \printnames[cite:author]{editor}}%
+   }{%
+      \printnames[cite:author]{author}%
+}}%
+\newbibmacro*{cite:title}{%
+  \iffieldundef{shorttitle}{%
+    \usebibmacro{title}%
+   }{\printfield{shorttitle}}%
+}%
+\newbibmacro*{fnverweis}{%
+  \ifbool{cbx:fnverweise}{%
+    \setunit{\addspace}%
+    \printtext[parens]{wie Anm\adddot\addspace%
+                \ref{footref:\thefield{entrykey}}}}%
+}%
+\newbibmacro*{cite:year}{%
+  \ifbool{cbx:jahrkeineklammern}%
+     {\printfield{year}}%
+     {\printfield[parens]{year}}}%
+\newbibmacro*{cite:short}{%
+  \ifboolexpr{test \ifciteibid and bool{cbx:ebd}%
+          not (bool{cbx:neueseitevollzitat} and%
+                 test {\iffirstonpage})}%
+       {\bibstring{ibidem}\isdot}%
+      {\ifbool{cbx:nurshorthand}%
+         {\printfield{shorthand}}%
+         {\ifboolexpr{test \ifciteidem and not%
+               (bool{cbx:neueseitevollzitat} and%
+                test {\iffirstonpage})}%
+             {\bibnamedash}%
+             {\usebibmacro{cite:name}}%
+        \setunit{\addcolon\addspace}%
+         \usebibmacro{cite:title}%
+         \ifbool{cbx:mitjahr}{\setunit{\addspace}%
+                             \usebibmacro{cite:year}}{}}%
+         \usebibmacro{fnverweis}}%
+}%
+\newbibmacro*{cite}{%
+  \ifciteseen{\bibhyperlink{ref:\thefield{entrykey}}{%
+        \usebibmacro{cite:short}}}%
+  {\bibhypertarget{ref:\thefield{entrykey}}{%
+        \bibhyperref{\usedriver{}{\thefield{entrytype}}}%
+         \iffootnote{\label{footref:\thefield{entrykey}}}{}%
+   }}%
+  \ifciteseen{\global\booltrue{cbx:seen}}%
+                  {\global\boolfalse{cbx:seen}}%
+  \usebibmacro{savestuff}%
+}%
+\DeclareCiteCommand{\cite}[\mkbibfootnote]%
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}\usebibmacro{cite}}%
+  {\multicitedelim}%
+  {\usebibmacro{postnote}}%
+\DeclareCiteCommand{\parencite}[\mkbibparens]%
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}\usebibmacro{cite}}%
+  {\multicitedelim}%
+  {\usebibmacro{postnote}}%
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]%
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}\usebibmacro{cite}}%
+  {\multicitedelim}%
+  {\usebibmacro{postnote}}%
+\DeclareCiteCommand{\textcite}%
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}\usebibmacro{cite}}%
+  {\multicitedelim}%
+  {\usebibmacro{postnote}%
+    \ifnum\themulticitetotal=\themulticitecount\ifbool{cbx:endpunkt}{\finentry}{}\fi%
+    \ifnum\thecitetotal=\thecitecount\ifbool{cbx:endpunkt}{\finentry}{}\fi}%
+\DeclareMultiCiteCommand{\cites}[\mkbibfootnote]{\cite}%
+            {\multicitedelim}%
+\DeclareMultiCiteCommand{\parencites}[\mkbibparens]{\parencite}%
+            {\multicitedelim}%
+\DeclareMultiCiteCommand{\footcites}[\mkbibfootnote]{\footcite}%
+           {\multicitedelim}%
+\DeclareMultiCiteCommand{\textcites}{\textcite}{\multicitedelim}%
+\endinput
+%%
+%% End of file `geschichtsfrkl.cbx'.
