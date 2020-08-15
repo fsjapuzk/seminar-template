@@ -102,14 +102,13 @@
 \renewcommand{\headrulewidth}{0pt}
 \fancyfoot[R]{\thepage}
 
-% ISO-690 compliant LASTNAME, firstname citations
-% cf. https://tex.stackexchange.com/a/525382/205402
-%\renewcommand\mkbibnamefamily{\lastnameformat}
-
 % glossaries parenthesis behavior
 \setabbreviationstyle[acronym]{long-only-short-only}
 
 % japterm(romaji, kokuji)
+\newcommand{\@japtermrawsqueeze}[2]{
+	\newacronym{#1}{\textit{#1}}{#1#2}
+}
 \newcommand{\@japtermraw}[2]{
 	\newacronym{#1}{\textit{#1}}{#1\space#2}
 }
@@ -119,12 +118,12 @@
 
 \newcommand{\japtermtranslate}[3]{\japterm{#1}{#2\space(#3)}}
 % japtermname(family, name, kanji, from, to)
-\newcommand{\japtermname}[5]{\@japtermraw{\MakeUppercase{#1}}{\space#2\space#3\space(#4-#5)}}
+\newcommand{\japtermname}[5]{\@japtermraw{#1}{#2\space#3\space(#4-#5)}}
 \newcommand{\japtermwesternname}[4]{\japterm{#1}{#2\space(#3-#4)}}
 % japtermmedium(name, kanji, release, meaning)
 \newcommand{\japtermmedium}[4]{\japterm{#1}{#2\space(#3, dt. #4)}}
 % japtermera(name, from, to)
-\newcommand{\japtermera}[3]{\japterm{#1}{{#1}-Zeit\space(#2-#3)}}
+\newcommand{\japtermera}[3]{\@japtermrawsqueeze{#1}{-Zeit (#2-#3)}}
 
 % TODO nice acronyms style
 % FIXME japref with names that contain non-ascii
