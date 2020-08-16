@@ -10,11 +10,6 @@
 \newbool{bbx:editorders}
 \DeclareBibliographyOption{editorders}[true]{\csuse{bool#1}%
            {bbx:editorders}}
-\newbool{bbx:hrsg}%
-\DeclareBibliographyOption{hrsg}[true]{\csuse{bool#1}{bbx:hrsg}}%
-\newbool{bbx:jahrreihe}%
-\DeclareBibliographyOption{jahrreihe}[true]{\csuse{bool#1}%
-           {bbx:jahrreihe}}%
 \newbool{bbx:maintitleebd}%
 \DeclareBibliographyOption{maintitleebd}[true]{\csuse{bool#1}%
            {bbx:maintitleebd}}
@@ -140,8 +135,7 @@
   \usebibmacro{year}%
 }%
 \newbibmacro*{pages}{%
-  \printtext{S\adddot}%
-  \setunit{\addspace}%
+  \printtext{S\adddot\addspace}%
   \printfield{pages}\isdot}%
 \newbibmacro*{maintitle+title+volumes}{%
   \iffieldsequal{maintitle}{title}%
@@ -198,10 +192,6 @@
        \setunit{\addcolon\addspace}%
              \printlist{publisher}\addspace}%
   \printfield{year}}%
-\newbibmacro*{addendum}{%
-  \iffieldundef{addendum}{}{%
-    \printtext[parens]{ND\addspace\printfield{addendum}}}%
-}%
 \newbibmacro*{editor+booktitle+volume}{%
   \ifnameundef{editor}{%
     \usebibmacro{maintitle}%
@@ -222,23 +212,6 @@
       \newunit%
     }%
 }%
-\DeclareBibliographyDriver{article}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{begentry}%
-  \usebibmacro{author}%
-  \setunit{\addcolon\addspace}\newblock%
-  \usebibmacro{articletitle}%
-  \newunit\newblock
-  \usebibmacro{in:}%
-  \usebibmacro{journal+volume+number+year}%
-  \setunit{\addcomma\addspace}%
-  \usebibmacro{pages}%
-  \ifcitation{}{%
-    \newunit\newblock
-    \usebibmacro{url+urldate}}%
-  \usebibmacro{savestuff}%
-  \usebibmacro{finentry}%
-}%
 \DeclareBibliographyDriver{book}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
@@ -249,15 +222,9 @@
   \setunit*{\addcolon\addspace}\newblock%
   \usebibmacro{maintitle+title+volumes}%
   \setunit{\addspace}%
-  \ifbool{bbx:jahrreihe}{}%
-    {\usebibmacro{series+number}}%
+  \usebibmacro{series+number}%
   \newunit\newblock%
   \usebibmacro{location+publisher+year}%
-  \setunit{\addspace}%
-  \ifbool{bbx:jahrreihe}{%
-    \usebibmacro{series+number}%
-    \setunit{\addspace}}{}%
-  \usebibmacro{addendum}%
   \ifcitation{}{%
     \setunit{\addspace}%
     \usebibmacro{url+urldate}}%
@@ -276,24 +243,35 @@
   \usebibmacro{in:}%
   \usebibmacro{editor+booktitle+volume}%
   \setunit{\addspace}%
-  \ifbool{bbx:jahrreihe}{}%
-    {\usebibmacro{series+number}}%
+  \usebibmacro{series+number}%
   \newunit\newblock%
   \usebibmacro{location+publisher+year}%
-  \ifbool{bbx:jahrreihe}{%
-    \setunit{\addspace}%
-    \usebibmacro{series+number}}{}%
   \setunit{\addcomma\addspace}%
   \usebibmacro{pages}%
-  \newunit\newblock%
-  \usebibmacro{addendum}%
   \ifcitation{}{%
-    \setunit{\addspace}%
+    \newunit\newblock%
     \usebibmacro{url+urldate}}%
   \setunit{\addperiod\addspace}%
   \usebibmacro{savestuff}%
   \usebibmacro{finentry}%
 }%
-\DeclareBibliographyAlias{collection}{book}
-\DeclareBibliographyAlias{incollection}{inbook}
+\DeclareBibliographyAlias{collection}{book}%
+\DeclareBibliographyAlias{incollection}{inbook}%
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\addcolon\addspace}\newblock%
+  \usebibmacro{articletitle}%
+  \newunit\newblock%
+  \usebibmacro{in:}%
+  \usebibmacro{journal+volume+number+year}%
+  \setunit{\addcomma\addspace}%
+  \usebibmacro{pages}%
+  \ifcitation{}{%
+    \newunit\newblock%
+    \usebibmacro{url+urldate}}%
+  \usebibmacro{savestuff}%
+  \usebibmacro{finentry}%
+}%
 \endinput

@@ -86,7 +86,6 @@
 	maxnames=3,
 	mits=true,
 	mitjahr=false,
-	hrsg=true,
 	citeinit=false
 ]{biblatex}
 
