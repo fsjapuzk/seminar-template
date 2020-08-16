@@ -57,6 +57,9 @@
 \renewcommand*{\newunitpunct}{\addperiod\addspace}%
 \newcommand*{\autorenschriftart}{\scshape}%
 \newcommand*{\autorentrennzeichen}{\addcomma\addspace}%
+\DefineBibliographyStrings{german}{%
+  and = {u.},%
+}%
 \DeclareNameFormat{author}{%
   \nameparts{#1}%
   {\autorenschriftart%
@@ -65,28 +68,10 @@
    \ifdefvoid{\namepartgiven}{}{\addcomma\space%
         \ifbool{bbx:nurinit}{\namepartgiveni}{\namepartgiven}}%
   \isdot%
-  \ifthenelse{\value{listcount}<\value{liststop}}%
-    {\autorentrennzeichen\addspace}{}%
-}%
-\DeclareNameFormat{editor}{%
-  \nameparts{#1}%
-   \ifdefvoid{\namepartgiven}{}{%
-        \ifbool{bbx:nurinit}{\namepartgiveni}{\namepartgiven}\addspace}%
-    \ifdefvoid{\namepartprefix}{}{\namepartprefix\addspace}%
-    \namepartfamily%
-    \ifnumcomp{\value{listcount}}{<}{\value{liststop}-1}%
-       {\addcomma\addspace}%
+  \ifnumcomp{\value{listcount}}{<}{\value{liststop}-1}%
+       {\autorentrennzeichen\addspace}%
        {\ifnumcomp{\value{listcount}}{=}{\value{liststop}}%
-           {}{\addspace\bibstring{and}\addspace}}%
-}%
-\DeclareNameFormat{hrsg}{%
-  \nameparts{#1}
-   \ifdefvoid{\namepartprefix}{}{\namepartprefix\addspace}%
-  \namepartfamily%
-  \ifdefvoid{\namepartgiven}{}{\addcomma\space%
-        \ifbool{bbx:nurinit}{\namepartgiveni}{\namepartgiven}}%
-  \ifthenelse{\value{listcount}<\value{liststop}}%
-        {\addnbspace\slash\addspace}{}%
+           {\usebibmacro{name:andothers}}{\addspace\bibstring{and}\addspace}}%
 }%
 \newcommand*{\orttrennzeichen}{\addnbspace\slash}%
 \DeclareListFormat{location}{%
@@ -106,17 +91,19 @@
                      and not test{\ifcitation}}%
             {\bibnamedash}%
             {\printnames{author}\iffieldundef{nameaddon}{}{\addspace\printfield{nameaddon}}\isdot}}}%
+\renewbibmacro*{editor}{%
+  \ifnameundef{editor}{}%
+      {\ifboolexpr{test {\iffieldequals{namehash}{\bbx@lasthash}}%
+                     and not test {\iffirstonpage}%
+                     and not test{\ifcitation}}%
+            {\bibnamedash}%
+            {\printnames[author]{editor}\isdot% (Hrsg.)
+               \addspace\printtext[parens]{\bibstring{editor}}}}}%
 \renewbibmacro*{author/editor}{%
    \ifnameundef{author}{%
       \ifnameundef{editor}{%
           \BibliographyWarning{Fehlender Autor *und* Herausgeber!}%
-      }{%
-        \ifboolexpr{test {\iffieldequals{namehash}{\bbx@lasthash}}%
-                   and not test{\iffirstonpage}%
-                   and not test{\ifcitation}}%
-             {\bibnamedash}%
-             {\printnames[author]{editor}\isdot% (Hrsg.)
-               \addspace\printtext[parens]{\bibstring{editor}}}%
+      }{\usebibmacro{editor}%
    }}{\usebibmacro{author}}%
 }%
 \renewbibmacro*{series+number}{%
@@ -139,15 +126,23 @@
           \printfield[titlecase]{journalsubtitle}}}}%
 \newbibmacro{year}{%
   \iffieldundef{year}{}{\printfield[parens]{year}}}%
-\newbibmacro*{journal+number+year}{%
+\newbibmacro{volume}{%
+  \iffieldundef{volume}{}{\printtext{\bibstring{volume}}\addspace\printfield{volume}}}%
+\newbibmacro{number}{%
+  \iffieldundef{number}{}{\printtext{\bibstring{number}}\addspace\printfield{number}}}%
+\newbibmacro*{journal+volume+number+year}{%
   \usebibmacro{journal}%
-  \setunit*{\addspace}%
-  \printfield{number}%
+  \setunit*{\addcomma\addspace}%
+  \usebibmacro{volume}%
+  \setunit*{\addcomma\addspace}%
+  \usebibmacro{number}%
   \setunit*{\addspace}%
   \usebibmacro{year}%
 }%
- \newbibmacro*{pages}{%
-   \printfield{pages}\isdot}%
+\newbibmacro*{pages}{%
+  \printtext{S\adddot}%
+  \setunit{\addspace}%
+  \printfield{pages}\isdot}%
 \newbibmacro*{maintitle+title+volumes}{%
   \iffieldsequal{maintitle}{title}%
     {\clearfield{maintitle}%
@@ -188,6 +183,15 @@
        \printfield[titlecase]{subtitle}}%
      \setunit*{\subtitlepunct}}%
   \printfield{titleaddon}\isdot}%
+\newbibmacro*{articletitle}{%
+  \ifboolexpr{test {\iffieldundef{title}} and%
+              test {\iffieldundef{subtitle}}}{}%
+    {\printtext[title]{%
+       \printfield[quotes]{title}%
+       \setunit*{\subtitlepunct}%
+       \printfield[quotes]{subtitle}}%
+     \setunit*{\subtitlepunct}}%
+  \printfield{titleaddon}\isdot}%
 \newbibmacro*{location+publisher+year}{%
   \printlist{location}%
   \iflistundef{publisher}{\setunit{\addspace}}{%
@@ -198,73 +202,40 @@
   \iffieldundef{addendum}{}{%
     \printtext[parens]{ND\addspace\printfield{addendum}}}%
 }%
-\newbibmacro*{signatur}{%
-  \iffieldundef{note}{}{\printtext[parens]{\printfield{note}}\nopunct}%
-}%
-\newbibmacro*{booktitle+volume+editor}{%
+\newbibmacro*{editor+booktitle+volume}{%
   \ifnameundef{editor}{%
     \usebibmacro{maintitle}%
     \newunit%
     \iffieldundef{volume}{}%
       {\bibstring{volume}\addspace\printfield{volume}\newunit}%
   }{%
-    \ifbool{bbx:hrsg}{%
-      \ifboolexpr{bool{bbx:editorders} and%
+    \ifboolexpr{bool{bbx:editorders} and%
             (test {\ifnameequals{editor}{\bbx@lasteditor}} or%
              test {\ifnamesequal{editor}{author}}) and%
              not (bool{cbx:neueseitevollzitat} and test {\iffirstonpage})}%
            {\bibstring{idem\thefield{gender}}\addspace}%
-           {\printnames[hrsg]{editor}\addspace}%
+           {\printnames[author]{editor}\addspace}%
       \printtext[parens]{\bibstring{editor}}\addcolon\addspace%
       \usebibmacro{maintitle}%
       \iffieldundef{volume}{}%
         {\newunit\bibstring{volume}\addspace\printfield{volume}}%
       \newunit%
-     }{%
-      \usebibmacro{maintitle}%
-      \iffieldundef{volume}{}%
-        {\newunit\bibstring{volume}\addspace\printfield{volume}}%
-      \newunit%
-      \printtext{hrsg\adddot\addspace v\adddot}%
-      \setunit{\addspace}%
-      \ifboolexpr{bool{bbx:editorders} and%
-               test {\ifnameequals{editor}{\bbx@lasteditor}} and%
-               not (bool{cbx:neueseitevollzitat} and test {\iffirstonpage})}%
-        {\bibstring{idem\thefield{gender}}}%
-        {\printnames{editor}}%
-     }}%
+    }%
 }%
-\newbibmacro*{reftitle}{%
-  \iffieldundef{title}{}{%
-    \printtext{Art\adddot\addspace}%
-    \printtext[quotes]{%
-      \usebibmacro{title}\setunit{\addspace}%
-      \iffieldundef{number}{}{\printfield[brackets]{number}}%
-}}}%
-\newbibmacro*{refmaintitle}{%
-  \iffieldundef{maintitle}{}{%
-    \printfield{maintitle}\setunit*{\addspace}\printfield{volume}%
-}}%
-\newbibmacro*{reztitle}{%
-  \printtext[quotes]{%
-    \usebibmacro{title}%
-}}%
 \DeclareBibliographyDriver{article}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
   \setunit{\addcolon\addspace}\newblock%
-  \usebibmacro{title}%
+  \usebibmacro{articletitle}%
   \newunit\newblock
   \usebibmacro{in:}%
-  \usebibmacro{journal+number+year}%
-  \newunit\newblock
+  \usebibmacro{journal+volume+number+year}%
+  \setunit{\addcomma\addspace}%
   \usebibmacro{pages}%
   \ifcitation{}{%
-    \setunit{\addspace}
+    \newunit\newblock
     \usebibmacro{url+urldate}}%
-  \setunit{\addperiod\addspace}%
-  \usebibmacro{signatur}%
   \usebibmacro{savestuff}%
   \usebibmacro{finentry}%
 }%
@@ -291,7 +262,6 @@
     \setunit{\addspace}%
     \usebibmacro{url+urldate}}%
   \setunit{\addperiod\addspace}%
-  \usebibmacro{signatur}%
   \usebibmacro{savestuff}%
   \usebibmacro{finentry}%
 }%
@@ -301,10 +271,10 @@
   \usebibmacro{author}%
   \ifnameundef{author}{}%
     {\setunit*{\addcolon\addspace}\newblock}%
-  \usebibmacro{title}%
+  \usebibmacro{articletitle}%
   \newunit\newblock
   \usebibmacro{in:}%
-  \usebibmacro{booktitle+volume+editor}%
+  \usebibmacro{editor+booktitle+volume}%
   \setunit{\addspace}%
   \ifbool{bbx:jahrreihe}{}%
     {\usebibmacro{series+number}}%
@@ -313,62 +283,17 @@
   \ifbool{bbx:jahrreihe}{%
     \setunit{\addspace}%
     \usebibmacro{series+number}}{}%
-  \newunit\newblock%
+  \setunit{\addcomma\addspace}%
   \usebibmacro{pages}%
-  \setunit{\addspace}%
+  \newunit\newblock%
   \usebibmacro{addendum}%
   \ifcitation{}{%
     \setunit{\addspace}%
     \usebibmacro{url+urldate}}%
   \setunit{\addperiod\addspace}%
-  \usebibmacro{signatur}%
   \usebibmacro{savestuff}%
   \usebibmacro{finentry}%
 }%
 \DeclareBibliographyAlias{collection}{book}
 \DeclareBibliographyAlias{incollection}{inbook}
-\DeclareBibliographyDriver{inreference}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{begentry}%
-  \usebibmacro{author}%
-  \setunit{\addcolon\addspace}\newblock%
-  \usebibmacro{reftitle}%
-  \newunit\newblock%
-  \usebibmacro{in:}%
-  \usebibmacro{refmaintitle}%
-  \setunit{\addspace}%
-  \usebibmacro{year}%
-  \newunit\newblock%
-  \usebibmacro{pages}%
-  \ifcitation{}{%
-    \setunit{\addspace}%
-    \usebibmacro{url+urldate}}%
-  \setunit{\addperiod\addspace}%
-  \usebibmacro{signatur}%
-  \usebibmacro{savestuff}%
-  \usebibmacro{finentry}%
-}%
-\DeclareBibliographyDriver{review}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{begentry}%
-  \usebibmacro{author}%
-  \setunit{\addspace}%
-  \printtext[parens]{Rez\adddot}%
-  \setunit{\addcolon\addspace}\newblock%
-  \usebibmacro{reztitle}%
-  \newunit\newblock
-  \usebibmacro{in:}%
-  \usebibmacro{journal+number+year}%
-  \newunit\newblock%
-  \usebibmacro{pages}%
-  \ifcitation{}{%
-    \setunit{\addspace}%
-    \usebibmacro{url+urldate}}%
-  \setunit{\addperiod\addspace}%
-  \usebibmacro{signatur}%
-  \usebibmacro{savestuff}%
-  \usebibmacro{finentry}%
-}%
 \endinput
-%%
-%% End of file `geschichtsfrkl.bbx'.

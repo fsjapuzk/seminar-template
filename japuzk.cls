@@ -79,13 +79,14 @@
 \RequirePackage[
 	backend=biber,
 	style=japuzkbib,
-	abbreviate=false,
+	abbreviate=true,
 	block=space,
 	sortlocale=de_DE,
 	autolang=other,
 	maxnames=3,
 	mits=true,
 	mitjahr=false,
+	hrsg=true,
 	citeinit=false
 ]{biblatex}
 
