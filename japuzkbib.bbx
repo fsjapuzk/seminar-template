@@ -110,11 +110,10 @@
            \newunit%
          }%
        }%
-    %}%
 }%
 \renewbibmacro*{journal}{%
-  \iffieldundef{journaltitle}
-    {}
+  \iffieldundef{journaltitle}%
+    {}%
     {\printtext[journaltitle]{%
           \printfield[titlecase]{journaltitle}%
           \setunit{\subtitlepunct}%
