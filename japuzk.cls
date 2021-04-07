@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e} % TODO
 \ProvidesClass{japuzk}[Richtlinien Wissenschaftliches Arbeiten UzK, Stand Juni 2019]
 
-\LoadClass[12pt]{scrartcl}
+\LoadClass[12pt,parskip=half]{scrartcl}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
@@ -69,12 +69,11 @@
 \RequirePackage{leading} % Zeilenabstand in pt.
 %\RequirePackage{mathptmx} % Times New Roman
 \RequirePackage{luatexja-fontspec} % Kanji
-\RequirePackage{fancyhdr} % page number positioning
+\RequirePackage{scrlayer-scrpage}
 \RequirePackage{csquotes}
 \RequirePackage{xspace}
 \RequirePackage{boxedminipage}
 \RequirePackage[a4paper, left=2cm, right=3cm, top=2.5cm, bottom=2cm, includefoot]{geometry}
-\RequirePackage[parfill]{parskip}
 \RequirePackage[acronyms,xindy]{glossaries-extra}
 \RequirePackage[
 	backend=biber,
@@ -92,31 +91,30 @@
 \newcommand{\@japfacultyleading}{16pt}
 \leading{\@japfacultyleading}
 
-\setlength\parindent{0pt}
-%TODO \setlength\parskip{\@japfacultyleading}
-
-%TODO is this formally required?
-\pagestyle{fancy}
-% remove pre-configured fancyhdr stuff
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\fancyfoot[R]{\thepage}
+\cfoot*{} % empty center footmark
+\ofoot*{\pagemark} % page number right (outer) footmark
 
 % glossaries parenthesis behavior
 \setabbreviationstyle[acronym]{long-only-short-only}
 
 % japterm(romaji, kokuji)
-\newcommand{\@japtermrawsqueeze}[2]{
-	\newacronym{#1}{\textit{#1}}{#1#2}
+\newcommand{\@japtermrawsqueezeId}[3]{
+	\newacronym{#1}{\textit{#2}}{#2#3}
 }
-\newcommand{\@japtermraw}[2]{
-	\newacronym{#1}{\textit{#1}}{#1\space#2}
+\newcommand{\@japtermrawId}[3]{
+	\newacronym{#1}{\textit{#2}}{#2\space#3}
 }
-\newcommand{\japterm}[2]{
-	\newacronym{#1}{\textit{#1}}{\textit{#1}\space#2}
+\newcommand{\japtermId}[3]{
+	\newacronym{#1}{\textit{#2}}{\textit{#2}\space#3}
 }
 
-\newcommand{\japtermtranslate}[3]{\japterm{#1}{#2\space(#3)}}
+\newcommand{\@japtermrawsqueeze}[2]{\japtermrawsqueezeId{#1}{#1}{#2}}
+\newcommand{\@japtermraw}[2]{\japtermrawId{#1}{#1}{#2}}
+\newcommand{\japterm}[2]{\japtermId{#1}{#1}{#2}}
+
+% japtermtranslate(romaji, kokuji, translation)
+\newcommand{\japtermtranslate}[3]{\japtermtranslateId{#1}{#1}{#2}{#3}}
+\newcommand{\japtermtranslateId}[4]{\japtermId{#1}{#2}{#3\space(#4)}}
 % japtermname(family, name, kanji, from, to)
 \newcommand{\japtermname}[5]{\@japtermraw{#1}{#2\space#3\space(#4-#5)}}
 \newcommand{\japtermwesternname}[4]{\japterm{#1}{#2\space(#3-#4)}}
