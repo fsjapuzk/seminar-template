@@ -34,6 +34,8 @@
 	\vspace{6.0cm}
 	\begin{center}
 		\huge \@title\\
+		[0.2cm]
+		\Large \@subtitle\\
 		[0.7cm]
 		\normalsize \@japdocmoduletitle\\
 		\@japdoctype~in der Veranstaltung\\	
