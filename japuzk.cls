@@ -6,16 +6,26 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 
-\newcommand{\japdoctype}[1]{\gdef\@japdoctype{#1}}
-\newcommand{\japdocmoduletitle}[1]{\gdef\@japdocmoduletitle{#1}}
-\newcommand{\japdoclvtitle}[1]{\gdef\@japdoclvtitle{#1}}
-\newcommand{\japdocsemester}[1]{\gdef\@japdocsemester{#1}}
-\newcommand{\japdocsupervisor}[1]{\gdef\@japdocsupervisor{#1}}
-\newcommand{\japdocmatriculation}[1]{\gdef\@japdocmatriculation{#1}}
-\newcommand{\japdocstudysemester}[1]{\gdef\@japdocstudysemester{#1}}
-\newcommand{\japdocfieldofstudy}[1]{\gdef\@japdocfieldofstudy{#1}}
-\newcommand{\japdocemail}[1]{\gdef\@japdocemail{#1}}
-\newcommand{\japdocaddress}[1]{\gdef\@japdocaddress{#1}}
+\newcommand{\japdoctype}[1]{\japdocType{#1}}
+\newcommand{\japdocType}[1]{\gdef\@japdocType{#1}}
+\newcommand{\japdocmoduletitle}[1]{\japdocModuleTitle{#1}}
+\newcommand{\japdocModuleTitle}[1]{\gdef\@japdocModuleTitle{#1}}
+\newcommand{\japdoclvtitle}[1]{\japdocLvTitle{#1}}
+\newcommand{\japdocLvTitle}[1]{\gdef\@japdocLvTitle{#1}}
+\newcommand{\japdocsemester}[1]{\japdocSemester{#1}}
+\newcommand{\japdocSemester}[1]{\gdef\@japdocSemester{#1}}
+\newcommand{\japdocsupervisor}[1]{\japdocSupervisor{#1}}
+\newcommand{\japdocSupervisor}[1]{\gdef\@japdocSupervisor{#1}}
+\newcommand{\japdocmatriculation}[1]{\japdocMatriculation{#1}}
+\newcommand{\japdocMatriculation}[1]{\gdef\@japdocMatriculation{#1}}
+\newcommand{\japdocstudysemester}[1]{\japdocStudySemester{#1}}
+\newcommand{\japdocStudySemester}[1]{\gdef\@japdocStudySemester{#1}}
+\newcommand{\japdocfieldofstudy}[1]{\japdocFieldOfStudy{#1}}
+\newcommand{\japdocFieldOfStudy}[1]{\gdef\@japdocFieldOfStudy{#1}}
+\newcommand{\japdocemail}[1]{\japdocEmail{#1}}
+\newcommand{\japdocEmail}[1]{\gdef\@japdocEmail{#1}}
+\newcommand{\japdocaddress}[1]{\japdocAddress{#1}}
+\newcommand{\japdocAddress}[1]{\gdef\@japdocAddress{#1}}
 
 \newcommand{\japfacultyhomepage}{https://japanologie.phil-fak.uni-koeln.de/}
 
@@ -37,23 +47,23 @@
 		[0.2cm]
 		\Large \@subtitle\\
 		[0.7cm]
-		\normalsize \@japdocmoduletitle\\
-		\@japdoctype~in der Veranstaltung\\	
-		\enquote{\@japdoclvtitle}\\
-		im \@japdocsemester\\
-		Bei \@japdocsupervisor\\
+		\normalsize \@japdocModuleTitle\\
+		\@japdocType~in der Veranstaltung\\	
+		\enquote{\@japdocLvTitle}\\
+		im \@japdocSemester\\
+		Bei \@japdocSupervisor\\
 	\end{center}
 	\vfill
 	\begin{center}
 		Eingereicht am \@date\\	
 		von\\
 		\@author\\
-		Matrikelnummer: \@japdocmatriculation\\
-		{\@japdocstudysemester}. Fachsemester\\
-		\@japdocfieldofstudy\\
-		\@japdocemail\\
+		Matrikelnummer: \@japdocMatriculation\\
+		{\@japdocStudySemester}. Fachsemester\\
+		\@japdocFieldOfStudy\\
+		\@japdocEmail\\
 		%[0.75cm]
-		%\@japdocaddress\\
+		%\@japdocAddress\\
 	\end{center}
 	\end{titlepage}
 	\setcounter{page}{1}

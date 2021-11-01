@@ -40,16 +40,16 @@ Für das Befüllen der Titelseite stehen folgende Befehle zur Verfügung:
 - `\subtitle{}`: Titel des Moduls
 - `\date{}`: Datum
 - `\author{}`: Vorname Nachname
-- `\japdocmoduletitle{}`: Titel des Moduls
-- `\japdoctype{}`: Hausarbeit / Essay
-- `\japdoclvtitle{}`: Titel der Lehrveranstaltung
-- `\japdocsemester{}`: Winter / Sommersemester 20XX
-- `\japdocsupervisor{}`: (Prof. Dr. / Dr.) Name des Dozierenden
-- `\japdocmatriculation{}`: Matrikelnummer
-- `\japdocstudysemester{}`: XX
-- `\japdocfieldofstudy{}`: Studiengang
-- `\japdocemail{}`: E-Mail-Adresse
-- `\japdocaddress{}`: Straße Hausnummer, PLZ Ort
+- `\japdocModuleTitle{}`: Titel des Moduls
+- `\japdocType{}`: Hausarbeit / Essay
+- `\japdocLvTitle{}`: Titel der Lehrveranstaltung
+- `\japdocSemester{}`: Winter / Sommersemester 20XX
+- `\japdocSupervisor{}`: (Prof. Dr. / Dr.) Name des Dozierenden
+- `\japdocMatriculation{}`: Matrikelnummer
+- `\japdocStudySemester{}`: XX
+- `\japdocFieldOfStudy{}`: Studiengang
+- `\japdocEmail{}`: E-Mail-Adresse
+- `\japdocAddress{}`: Straße Hausnummer, PLZ Ort
 
 ### Japanische Begriffe
 
