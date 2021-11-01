@@ -65,13 +65,15 @@ Die Formatvorlage kann **nicht** automatisch transkribieren. Die Datenbank aus E
 
 Diese Einträge können dann im Fließtext mithilfe des Befehls `\japref{id}` eingebunden werden. Der Befehl entscheidet selbstständig, ob es sich um die erste Nennung im Dokument handelt und demnach die volle oder die kurze Darstellungsform abgedruckt werden sollte.
 
-Die `id` ist dabei stets das erste Argument der jeweiligen `\japterm...` Befehle: `\japref{kanji}`, `\japref{Barack Obama}`. Manche Systeme haben Schwierigkeiten mit nicht-ASCII-Zeichen als `id`, daher gibt es für jeden `\japterm` Befehl entsprechende `\japtermId` Pendants: `\japtermTranslateId`, `\japtermEraId` usw. Diese nehmen als **zusätzliches erstes** Argument eine manuelle `id`, die dann für `\japref` verwendet werden kann:
+Die `id` ist dabei stets das erste Argument der jeweiligen `\japterm...` Befehle: `\japref{kanji}`, `\japref{Obama}`. Manche Systeme haben Schwierigkeiten mit nicht-ASCII-Zeichen als `id`, daher gibt es für jeden `\japterm` Befehl entsprechende `\japtermId` Pendants: `\japtermTranslateId`, `\japtermEraId` usw. Diese nehmen als **zusätzliches erstes** Argument eine manuelle `id`, die dann für `\japref` verwendet werden kann:
 
 ```latex
 \japtermId{shoujo-manga}{shôjo manga}{少女マンガ}{Mädchencomic}
 
 \begin{document}
-	Es handelt sich um \japref{shoujo-manga}. Abbildung 42 zeigt einen Auszug aus einem \japref{shoujou-manga}.
+	Es handelt sich um \japref{shoujo-manga}. Abbildung 42 zeigt einen Auszug aus einem \japref{shoujo-manga}.
+	% Ergibt: "Es handelt sich um shôjo manga 少女マンガ (Mädchencomic). Abbildung 42 zeigt einen Auszug aus einem shôjo manga"
+	% (inklusive Kursivsetzung von "shôjo manga" in beiden Fällen, die in Markdown-Codeblöcken technisch leider nicht möglich ist)
 \end{document}
 ```
 
