@@ -17,8 +17,11 @@
 
 \usepackage{csquotes}
 \usepackage{hyperref}
+\usepackage{enumitem}
+\setlist[description]{style=nextline}
 
-\addbibresource{sample.bib}
+\newcommand{\bibresourcename}{sample.bib}
+\addbibresource{\bibresourcename}
 
 \japterm{kanji}{漢字}
 \japtermId{nengou}{nengô}{年号}
@@ -66,6 +69,70 @@ Beim erstmaligen Verweis auf eine Quelle in der Fußnote sind die \textbf{vollst
 
 \subsubsection{Japanische Quellen}
 Bei Zitaten aus dem Japanischen muss der Originaltext nicht noch einmal wiedergegeben werden, die genaue Quellenangabe reicht hier aus. Bei japanischen Titeln werden Autor, Titel, Reihe und Zeitschriftentitel transliteriert und mit den entsprechenden \japref{kanji} versehen. Die \japref{kanji} der Buchtitel werden \textbf{nicht} kursiv gesetzt! Eine Übersetzung des Titels ist in der Regel nicht nötig, es sei denn, im Fließtext wird explizit darauf Bezug genommen. Verlagsort und Verlag können ohne Angabe der \japref{kanji} lediglich transliteriert werden.\footcite[Vgl.][112]{suzuki:ronbun}
+
+\printbibliography[heading=bibintoc]
+
+\appendix
+\newrefsection
+
+\section{Zitationsdaten}
+
+Hier noch einige Beispiele für Zitationsdaten entsprechend der Angaben im Leitfaden. Die entsprechenden Bib(La)TeX-Felder können der beigefügten \texttt{\bibresourcename} Datei entnommen werden.
+
+Internetquellen werden zurzeit noch nicht (korrekt) unterstützt. Entsprechende Felder für die URL sind im BibTeX-Standard zwar vorhanden und können in die Bibliographie-Datei eingebunden werden;\ es wird jedoch kein Gewähr dafür übernommen, dass diese auch korrekt dargestellt werden.
+
+\subsection{Monographien}
+
+\textit{Hinweis}: Diese Formatbeispiele enden bewusst \emph{nicht} mit einem Punkt. BibTeX unterscheidet nämlich zwischen \texttt{bibliography}- und \texttt{cite}-Stil. Ersterer wird im Literaturverzeichnis verwendet und enthält standardmäßig einen Punkt. Letzterer wird im Fließtext verwendet und enthält keinen Punkt, um die Einbindung eines Zitats in einen Satz zu ermöglichen. Punkte am Ende müssen ggf.\ manuell nachgesetzt werden.
+
+\begin{description}
+	\item[Monographie mit 1 Autor]\fullcite{monogr:autor}
+	\item[Monographie mit 1 Herausgeber]\fullcite{monogr:hrsg}
+	\item[Monographie mit 1 Autor innerhalb einer Reihe]\fullcite{monogr:autor-reihe}
+	\item[Monographie mit 1 Herausgeber innerhalb einer Reihe]\fullcite{monogr:hrsg-reihe}
+\end{description}
+
+\underline{Anmerkung}: Bei bis zu drei Autoren, Herausgebern oder Verlagsorten werden alle angeführt; bei mehr als drei wird nur der erste genannt und dahinter mit \enquote{u.a.} abgekürzt.
+
+\begin{itemize}
+	\item \fullcite{monogr:autoren-drei}
+	\item \fullcite{monogr:autoren-viele}
+\end{itemize}
+
+\subsection{Sammelbände und Zeitschriften}
+
+\begin{description}
+	\item[Artikel/Beitrag in einem Sammelband]\fullcite{artikel:sammelband}
+	\item[Artikel/Beitrag in einer Zeitschrift]\fullcite{artikel:zeitschrift}
+\end{description}
+
+\underline{Anmerkung}: Bei bis zu drei Autoren, Herausgebern oder Verlagsorten werden alle angeführt, bei mehr als drei wird nur der erste genannt und dahinter mit \enquote{u.a.} abgekürzt.
+
+\begin{itemize}
+	\item \fullcite{artikel:autoren-drei}
+	\item \fullcite{artikel:autoren-viele}
+\end{itemize}
+
+\subsection{Japanischsprachige Literatur}
+
+Bib(La)Tex unterstützt (noch) keine Wiedergabe von Autorennamen in verschiedenen Schriftsystemen. Daher muss für die Unterstützung in der aktuellen Formatvorlage eine Behelfslösung genutzt werden: Der bibliographischen Datenbank wird Glauben gemacht, der Mensch heiße \enquote{Nachname} mit Nachnamen und \enquote{Vorname Kanji Kanji} mit Vornamen. Konkret resultiert dies in folgender, beispielhafter BibTeX-Angabe:
+
+\begin{verbatim}
+author = {Suzuki, {Kazuko 鈴木和子} and Yamada, {Ken'ichi 山田健一}}
+\end{verbatim}
+
+Insbesondere werden also die Kanji für den Vor- \textbf{und} Nachnamen mit geschweiften Klammern an den romanisierten Vornamen gebunden. Eine Kursivsetzung erfolgt dabei nur \enquote{aus Glück} nicht, da \texttt{luatex-ja} keine kursiven Fonts für Kanji kennt.
+
+Mit Publikationstiteln wird analog verfahren. Alternativ kann hier auch das Feld \texttt{titleaddon} belegt werden.
+
+\begin{verbatim}
+title = {Ronbun wo kakimashô! 論文を書きましょう！}
+\end{verbatim}
+
+\begin{description}
+	\item[Beispiel japanische Monographie] \fullcite{jap:monogr}
+	\item[Beispiel japanischer Zeitschriftenartikel] \fullcite{jap:artikel}
+\end{description}
 
 \printbibliography[heading=bibintoc]
 

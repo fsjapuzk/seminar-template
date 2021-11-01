@@ -93,8 +93,8 @@
                      and not test {\iffirstonpage}%
                      and not test{\ifcitation}}%
             {\bibnamedash}%
-            {\printnames[author]{editor}\isdot% (Hrsg.)
-               \addspace\printtext[parens]{\bibstring{editor}}}}}%
+            {\printnames[author]{editor}}}\isdot% (Hrsg.)
+               \addspace\printtext[parens]{\bibstring{editor}}}%
 \renewbibmacro*{author/editor}{%
    \ifnameundef{author}{%
       \ifnameundef{editor}{%
