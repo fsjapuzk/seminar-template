@@ -78,6 +78,7 @@
 \RequirePackage[a4paper, left=2cm, right=3cm, top=2.5cm, bottom=2cm, includefoot]{geometry}
 \RequirePackage[acronyms,xindy]{glossaries-extra}
 \RequirePackage[hang]{footmisc}
+\RequirePackage{ifthen}
 \RequirePackage[
 	backend=biber,
 	style=japuzkbib,
@@ -100,32 +101,56 @@
 % glossaries parenthesis behavior
 \setabbreviationstyle[acronym]{long-only-short-only}
 
-% japterm(romaji, kokuji)
-\newcommand{\@japtermrawsqueezeId}[3]{
-	\newacronym{#1}{\textit{#2}}{#2#3}
-}
-\newcommand{\@japtermrawId}[3]{
-	\newacronym{#1}{\textit{#2}}{#2\space#3}
-}
+% japterm(?id, romaji, kokuji)
+\newcommand{\japterm}[2]{\japtermId{#1}{#1}{#2}}
 \newcommand{\japtermId}[3]{
 	\newacronym{#1}{\textit{#2}}{\textit{#2}\space#3}
 }
 
-\newcommand{\@japtermrawsqueeze}[2]{\japtermrawsqueezeId{#1}{#1}{#2}}
-\newcommand{\@japtermraw}[2]{\japtermrawId{#1}{#1}{#2}}
-\newcommand{\japterm}[2]{\japtermId{#1}{#1}{#2}}
+% japtermTranslate(?id, romaji, kokuji, translation)
+\newcommand{\japtermtranslate}[3]{\japtermTranslate{#1}{#2}{#3}}
+\newcommand{\japtermTranslate}[3]{\japtermTranslateId{#1}{#1}{#2}{#3}}
+\newcommand{\japtermtranslateId}[4]{\japtermTranslateId{#1}{#2}{#3}{#4}}
+\newcommand{\japtermTranslateId}[4]{
+	\japtermId{#1}{#2}{#3\space(#4)}
+}
+% japtermName[position](?id, family, name, kanji, from, to)
+\newcommand{\japtermname}[6][std]{\japtermName[#1]{#2}{#3}{#4}{#5}{#6}}
+\newcommand{\japtermName}[6][std]{
+	\ifthenelse{\equal{#1}{pre}}{
+		\japtermNameId[#1]{#3}{#2}{#3}{#4}{#5}{#6}
+	}{
+		\japtermNameId[#1]{#2}{#2}{#3}{#4}{#5}{#6}
+	}
+}
+\newcommand{\japtermnameId}[7][std]{\japtermNameId[#1]{#2}{#3}{#4}{#5}{#6}{#7}}
+\newcommand{\japtermNameId}[7][std]{
+	\ifthenelse{\equal{#1}{pre}}{
+		\newacronym{#2}{#4}{\MakeUppercase{#3}\space#4\space#5\space(#6-#7)}
+	}{
+		\newacronym{#2}{#3}{\MakeUppercase{#3}\space#4\space#5\space(#6-#7)}
+	}
+}
+% japtermWesternName(?id, fullname, kanji, from, to)
+\newcommand{\japtermwesternname}[4]{\japtermWesternName{#1}{#2}{#3}{#4}}
+\newcommand{\japtermWesternName}[4]{\japtermWesternNameId{#1}{#1}{#2}{#3}{#4}}
+\newcommand{\japtermwesternnameId}[5]{\japtermWesternNameId{#1}{#2}{#3}{#4}{#5}}
+\newcommand{\japtermWesternNameId}[5]{
+	\japtermId{#1}{#2}{#3\space(#4-#5)}
+}
+% japtermMedium(?id, name, kanji, release, meaning)
+\newcommand{\japtermmedium}[4]{\japtermMedium{#1}{#2}{#3}{#4}}
+\newcommand{\japtermMedium}[4]{\japtermMediumId{#1}{#1}{#2}{#3}{#4}}
+\newcommand{\japtermmediumId}[5]{\japtermMediumId{#1}{#2}{#3}{#4}{#5}}
+\newcommand{\japtermMediumId}[5]{
+	\japtermId{#1}{#2}{#3\space(#4, dt. #5)}
+}
+% japtermEra(?id, name, from, to)
+\newcommand{\japtermera}[3]{\japtermEra{#1}{#2}{#3}}
+\newcommand{\japtermEra}[3]{\japtermEraId{#1}{#1}{#2}{#3}}
+\newcommand{\japtermeraId}[4]{\japtermEraId{#1}{#2}{#3}{#4}}
+\newcommand{\japtermEraId}[4]{
+	\newacronym{#1}{#2}{#2-Zeit (#3-#4)}
+}
 
-% japtermtranslate(romaji, kokuji, translation)
-\newcommand{\japtermtranslate}[3]{\japtermtranslateId{#1}{#1}{#2}{#3}}
-\newcommand{\japtermtranslateId}[4]{\japtermId{#1}{#2}{#3\space(#4)}}
-% japtermname(family, name, kanji, from, to)
-\newcommand{\japtermname}[5]{\@japtermraw{#1}{#2\space#3\space(#4-#5)}}
-\newcommand{\japtermwesternname}[4]{\japterm{#1}{#2\space(#3-#4)}}
-% japtermmedium(name, kanji, release, meaning)
-\newcommand{\japtermmedium}[4]{\japterm{#1}{#2\space(#3, dt. #4)}}
-% japtermera(name, from, to)
-\newcommand{\japtermera}[3]{\@japtermrawsqueeze{#1}{-Zeit (#2-#3)}}
-
-% TODO nice acronyms style
-% FIXME japref with names that contain non-ascii
 \newcommand{\japref}[1]{\gls{#1}}

@@ -21,10 +21,10 @@
 \addbibresource{sample.bib}
 
 \japterm{kanji}{漢字}
-\japterm{nengô}{年号}
-\japtermtranslate{shôjo manga}{少女マンガ}{Mädchencomic}
-\japtermname{NATSUME}{Sôseki}{夏目漱石}{1867}{1916}
-\japtermera{Meiji}{1868}{1912}
+\japtermId{nengou}{nengô}{年号}
+\japtermtranslateId{shoujo-manga}{shôjo manga}{少女マンガ}{Mädchencomic}
+\japtermnameId[pre]{natsume}{Natsume}{Sôseki}{夏目漱石}{1867}{1916}
+\japtermeraId{meiji}{Meiji}{1868}{1912}
 
 \begin{document}
 
@@ -42,8 +42,8 @@ Die wissenschaftliche Hausarbeit ist in \textbf{einfacher Ausfertigung} ausgedru
 \section{Der Hauptteil}
 Eine wissenschaftliche Arbeit stellt zusammenhängende Gedankengänge und Argumentationen dar. Absätze bestehen daher aus mindestens zwei Sätzen und mehr!
 
-Beim erstmaligen Auftreten eines japanischsprachigen Begriffes sind die Schriftzeichen mit anzuführen, ferner noch bei Personen die Lebensdaten, bei Werken, Filmen etc. die deutsche Übersetzung und das Entstehungsjahr, bei Jahresdevisen (\japref{nengô}) die Jahresangaben etc. Transliteration und Schriftzeichen sind dabei nicht zu trennen.\newline
-\textbf{Beispiele}: \japref{shôjo manga}; \japref{NATSUME}, \japref{Meiji} etc.\newline
+Beim erstmaligen Auftreten eines japanischsprachigen Begriffes sind die Schriftzeichen mit anzuführen, ferner noch bei Personen die Lebensdaten, bei Werken, Filmen etc. die deutsche Übersetzung und das Entstehungsjahr, bei Jahresdevisen (\japref{nengou}) die Jahresangaben etc. Transliteration und Schriftzeichen sind dabei nicht zu trennen.\newline
+\textbf{Beispiele}: \japref{shoujo-manga}; \japref{natsume}, \japref{meiji} etc.\newline
 Verwenden Sie für die korrekte Transliteration (=Umschrift) unbedingt die Richtlinien auf der Homepage der Japanologie.
 
 \subsection{Zitieren und Belegen}
@@ -51,15 +51,15 @@ Wesentliches Beurteilungskriterium für wissenschaftliches Arbeiten ist das Offe
 
 \subsubsection{Direktes Zitat}
 Direkte oder wörtliche Zitate werden im Text durch Anführungszeichen gekennzeichnet und müssen durch eine eindeutige Quellenangabe mit Seitenzahl in der Fußnote ausgewiesen werden.\newline
-\textbf{Beispiel}: Mustermann sagt hierzu: \enquote{Direkte Zitate ohne Fußnote und Quellenangabe sind wertlos.}\footcite[12]{muster:quellen}
+\textbf{Beispiel}: \citeauthor{muster:quellen} sagt hierzu: \enquote{Direkte Zitate ohne Fußnote und Quellenangabe sind wertlos.}\footcite[12]{muster:quellen}
 
 \subsubsection{Indirektes Zitat}
 Indirekte Zitate sind Wiedergaben einer Aussage Dritter (z.B. Der Autor meint, dass~\ldots~sei; oder bestimmte Verben wie \enquote{gelten}, \enquote{sollen}, \enquote{scheinen}), die als solches ebenfalls durch eine Quellenangabe mit Seitenzahl in der Fußnote ausgewiesen werden müssen.\newline
-\textbf{Beispiel}: Eine hiervon abweichende Praxis sieht Doe als Missachtung wissenschaftlicher Prinzipien an.\footcite[Vgl.][13\psq]{doe:references}
+\textbf{Beispiel}: Eine hiervon abweichende Praxis sieht \citeauthor{doe:references} als Missachtung wissenschaftlicher Prinzipien an.\footcite[Vgl.][13\psq]{doe:references}
 
 \subsubsection{Drittzitat}
 Sogenannte Drittzitate, auch als Zweitzitate, Sekundärzitate oder Zitate aus zweiter Hand bezeichnet, sind Inhalte oder wörtliche Zitate aus Publikationen, die ungeprüft, ohne den zugrundeliegenden Text gelesen zu haben, in die eigene Arbeit übernommen werden. \underline{Dieses Vorgehen ist wissenschaftlich nicht zulässig!}\newline
-Wenn beispielsweise in einem Text, der Ihnen vorliegt, ein direktes Zitat von NATSUME Sôseki angeführt wird, dürfen Sie dieses Sôseki-Zitat nicht übernehmen, sondern Sie müssen im Originaltext von Sôseki nachschauen und direkt daraus zitieren.
+Wenn beispielsweise in einem Text, der Ihnen vorliegt, ein direktes Zitat von \japref{natsume} angeführt wird, dürfen Sie dieses \japref{natsume}-Zitat nicht übernehmen, sondern Sie müssen im Originaltext von \japref{natsume} nachschauen und direkt daraus zitieren.
 
 \subsection{Form der Quellenangaben}
 Beim erstmaligen Verweis auf eine Quelle in der Fußnote sind die \textbf{vollständigen Literaturangaben} aufzuführen. Beachten Sie hierfür unsere Vorgaben für die Notation! Bei allen weiteren Nennungen wird ein Kurzbeleg (Autor, (Kurz-)Titel und Seitenzahl) verwendet.\footcite[Vgl.][10]{muster:quellen}
@@ -67,7 +67,6 @@ Beim erstmaligen Verweis auf eine Quelle in der Fußnote sind die \textbf{vollst
 \subsubsection{Japanische Quellen}
 Bei Zitaten aus dem Japanischen muss der Originaltext nicht noch einmal wiedergegeben werden, die genaue Quellenangabe reicht hier aus. Bei japanischen Titeln werden Autor, Titel, Reihe und Zeitschriftentitel transliteriert und mit den entsprechenden \japref{kanji} versehen. Die \japref{kanji} der Buchtitel werden \textbf{nicht} kursiv gesetzt! Eine Übersetzung des Titels ist in der Regel nicht nötig, es sei denn, im Fließtext wird explizit darauf Bezug genommen. Verlagsort und Verlag können ohne Angabe der \japref{kanji} lediglich transliteriert werden.\footcite[Vgl.][112]{suzuki:ronbun}
 
-\nocite{*}
 \printbibliography[heading=bibintoc]
 
 \end{document}
