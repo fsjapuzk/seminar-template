@@ -77,6 +77,7 @@
 \RequirePackage{boxedminipage}
 \RequirePackage[a4paper, left=2cm, right=3cm, top=2.5cm, bottom=2cm, includefoot]{geometry}
 \RequirePackage[acronyms,xindy]{glossaries-extra}
+\RequirePackage[hang]{footmisc}
 \RequirePackage[
 	backend=biber,
 	style=japuzkbib,
