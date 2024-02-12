@@ -12,10 +12,14 @@
 \newcommand{\japdocModuleTitle}[1]{\gdef\@japdocModuleTitle{#1}}
 \newcommand{\japdoclvtitle}[1]{\japdocLvTitle{#1}}
 \newcommand{\japdocLvTitle}[1]{\gdef\@japdocLvTitle{#1}}
+\newcommand{\japdocdesireddegree}[1]{\japdocDesiredDegree{#1}}
+\newcommand{\japdocDesiredDegree}[1]{\gdef\@japdocDesiredDegree{#1}}
 \newcommand{\japdocsemester}[1]{\japdocSemester{#1}}
 \newcommand{\japdocSemester}[1]{\gdef\@japdocSemester{#1}}
 \newcommand{\japdocsupervisor}[1]{\japdocSupervisor{#1}}
 \newcommand{\japdocSupervisor}[1]{\gdef\@japdocSupervisor{#1}}
+\newcommand{\japdocsecondsupervisor}[1]{\japdocSecondSupervisor{#1}}
+\newcommand{\japdocSecondSupervisor}[1]{\gdef\@japdocSecondSupervisor{#1}}
 \newcommand{\japdocmatriculation}[1]{\japdocMatriculation{#1}}
 \newcommand{\japdocMatriculation}[1]{\gdef\@japdocMatriculation{#1}}
 \newcommand{\japdocstudysemester}[1]{\japdocStudySemester{#1}}
@@ -45,11 +49,24 @@
 	\begin{center}
 		\huge \@title \ifx\@subtitle\@empty{\\[0.7cm]}\else{\\[0.2cm]}\fi
 		\Large \ifx\@subtitle\@empty{}\else{\@subtitle\\[0.7cm]}\fi
-		\normalsize \@japdocModuleTitle\\
-		\@japdocType~in der Veranstaltung\\	
-		\enquote{\@japdocLvTitle}\\
-		im \@japdocSemester\\
-		Bei \@japdocSupervisor\\
+		\normalsize
+		\ifx\@japdocDesiredDegree\@empty
+		{
+			\@japdocModuleTitle\\
+			\@japdocType~in der Veranstaltung\\
+			\enquote{\@japdocLvTitle}\\
+			im \@japdocSemester\\
+			Bei \@japdocSupervisor\\
+		}
+		\else
+		{
+			\@japdocType\\
+			zur Erlangung des akademischen Grades\\
+			\@japdocDesiredDegree\\[0.2cm]
+			Erstgutachten: \@japdocSupervisor\\
+			Zweitgutachten: \@japdocSecondSupervisor\\
+		}
+		\fi
 	\end{center}
 	\vfill
 	\begin{center}
