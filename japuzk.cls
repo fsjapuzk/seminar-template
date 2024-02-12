@@ -43,10 +43,8 @@
 	%\end{minipage}
 	\vspace{6.0cm}
 	\begin{center}
-		\huge \@title\\
-		[0.2cm]
-		\Large \@subtitle\\
-		[0.7cm]
+		\huge \@title \ifx\@subtitle\@empty{\\[0.7cm]}\else{\\[0.2cm]}\fi
+		\Large \ifx\@subtitle\@empty{}\else{\@subtitle\\[0.7cm]}\fi
 		\normalsize \@japdocModuleTitle\\
 		\@japdocType~in der Veranstaltung\\	
 		\enquote{\@japdocLvTitle}\\
