@@ -17,6 +17,8 @@
 \newcommand{\japdocfieldofstudy}[1]{\japdocFieldOfStudy{#1}}
 \newcommand{\japdocFieldOfStudy}[1]{\gdef\@japdocFieldOfStudy{#1}}
 
+\newcommand{\japdocheaderSupervisorPrefix}[1][Dozent*in]{\gdef\@japdocheaderSupervisor{#1}}
+
 \newcommand{\japfacultyhomepage}{https://japanologie.phil-fak.uni-koeln.de/}
 
 \renewcommand{\maketitle}{
@@ -24,7 +26,7 @@
 		Ostasiatisches Seminar\\
 		Abt. Japanologie\\
 		\@japdocType~\enquote{\@japdocLvTitle}\\
-		Dozent: \@japdocSupervisor
+		\@japdocheaderSupervisor:~\@japdocSupervisor
 	\end{minipage}
 	\begin{minipage}{.5\textwidth}\flushright
 		\@author\\

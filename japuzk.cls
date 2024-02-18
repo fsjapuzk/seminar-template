@@ -56,7 +56,7 @@
 			\@japdocType~in der Veranstaltung\\
 			\enquote{\@japdocLvTitle}\\
 			im \@japdocSemester\\
-			Bei \@japdocSupervisor\\
+			bei \@japdocSupervisor\\
 		}
 		\else
 		{
