@@ -55,7 +55,6 @@
 			\@japdocModuleTitle\\
 			\@japdocType~in der Veranstaltung\\
 			\enquote{\@japdocLvTitle}\\
-			im \@japdocSemester\\
 			bei \@japdocSupervisor\\
 		}
 		\else
@@ -102,7 +101,7 @@
 \RequirePackage{boxedminipage}
 \RequirePackage[a4paper, left=2cm, right=3cm, top=2.5cm, bottom=2cm, includefoot]{geometry}
 \RequirePackage[acronyms,xindy]{glossaries-extra}
-\RequirePackage[hang]{footmisc}
+\RequirePackage[hang,splitrule]{footmisc}
 \RequirePackage{ifthen}
 \RequirePackage[
 	backend=biber,
@@ -151,9 +150,9 @@
 \newcommand{\japtermnameId}[7][std]{\japtermNameId[#1]{#2}{#3}{#4}{#5}{#6}{#7}}
 \newcommand{\japtermNameId}[7][std]{
 	\ifthenelse{\equal{#1}{pre}}{
-		\newacronym{#2}{#4}{\MakeUppercase{#3}\space#4\space#5\space(#6-#7)}
+		\newacronym{#2}{#4}{\MakeUppercase{#3}\space#4\space#5\space(#6--#7)}
 	}{
-		\newacronym{#2}{#3}{\MakeUppercase{#3}\space#4\space#5\space(#6-#7)}
+		\newacronym{#2}{#3}{\MakeUppercase{#3}\space#4\space#5\space(#6--#7)}
 	}
 }
 % japtermWesternName(?id, fullname, kanji, from, to)
