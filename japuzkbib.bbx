@@ -274,4 +274,21 @@
   \usebibmacro{savestuff}%
   \usebibmacro{finentry}%
 }%
+\DeclareBibliographyDriver{software}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor}%
+  \setunit*{\addcolon\addspace}\newblock%
+  \usebibmacro{title}%
+  \newunit\newblock%
+  \printlist{publisher}%
+  \setunit*{\addspace}%
+  \printfield{year}%
+  \ifcitation{}{%
+    \setunit{\addspace}%
+    \usebibmacro{url+urldate}}%
+  \setunit{\addperiod\addspace}%
+  \usebibmacro{savestuff}%
+  \usebibmacro{finentry}%
+}%
 \endinput
